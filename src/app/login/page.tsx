@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { NextPage } from 'next';
+import { signIn } from 'next-auth/react';
+import Image from 'next/image';
 
 const Login: NextPage = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +29,14 @@ const Login: NextPage = () => {
       ...formData,
       [e.target.name]: value,
     });
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn('google', { callbackUrl: '/' });
+    } catch (error) {
+      console.error('Google sign in error:', error);
+    }
   };
 
   return (
@@ -157,6 +167,38 @@ const Login: NextPage = () => {
             </button>
           </motion.div>
         </form>
+
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 dark:border-gray-600 
+                rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 
+                bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                transition-all duration-200"
+            >
+              <Image
+                src="/google.svg"
+                alt="Google logo"
+                width={20}
+                height={20}
+              />
+              Sign in with Google
+            </button>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

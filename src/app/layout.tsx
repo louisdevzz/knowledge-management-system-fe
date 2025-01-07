@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import './globals.css'
 import type { Metadata } from 'next';
+import Providers from '@/components/Providers';
 
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ['latin'],
@@ -52,11 +53,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={spaceGrotesk.className}>
       <body>
-        <Header />
-        <main className="min-h-screen pt-16">
-          {children}
-        </main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

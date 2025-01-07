@@ -8,10 +8,10 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Web3 KMS
+              KMS
             </h3>
             <p className="text-gray-600">
-              Your gateway to Web3 knowledge management and learning.
+              Your gateway to knowledge management and learning.
             </p>
           </div>
 
