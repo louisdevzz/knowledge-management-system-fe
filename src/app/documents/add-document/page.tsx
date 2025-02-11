@@ -74,16 +74,28 @@ const AddDocument: NextPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
         const submitData = new FormData();
         if (file) {
             submitData.append('file', file);
         }
+
+        // Add all form data to FormData
         Object.entries(formData).forEach(([key, value]) => {
             submitData.append(key, value);
         });
 
         try {
-            console.log('Form submitted:', submitData);
+            const res = await fetch('/api/document', {
+                method: 'POST',
+                body: submitData,
+            });
+            
+            if (!res.ok) {
+                throw new Error('Failed to submit document');
+            }
+            
+            console.log('Document submitted successfully');
         } catch (error) {
             console.error('Error submitting form:', error);
         }
